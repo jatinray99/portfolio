@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Jatin Ray - Data Scientist Portfolio</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+		<style>:root
+		{
+			--netflix-red: #e50914;
+			--netflix-black: #141414;
+			--netflix-dark-gray: #222;
+			--text-light: #ffffff;
+			--text-medium: #b3b3b3;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+			background: var(--netflix-black);
+			color: var(--text-light);
+			overflow-x: hidden;
+		}
+
+		h1,
+		h2,
+		h3 {
+			font-family: 'Bebas Neue', sans-serif;
+			letter-spacing: 2px;
+		}
+
+		/* --- Navbar --- */
+		.navbar {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0));
+			padding: 20px 60px;
+			z-index: 1000;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			transition: background-color 0.4s ease-in-out;
+		}
+
+		.navbar.scrolled {
+			background-color: var(--netflix-black);
+		}
+
+		.navbar-logo {
+			color: var(--netflix-red);
+			font-size: 36px;
+			font-weight: bold;
+			user-select: none;
+			font-family: 'Bebas Neue', sans-serif;
+			letter-spacing: 2.5px;
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 25px;
+		}
+
+		.nav-link {
+			color: var(--text-light);
+			text-decoration: none;
+			font-size: 16px;
+			font-weight: 700;
+			transition: color 0.3s;
+		}
+
+		.nav-link:hover {
+			color: var(--text-medium);
+		}
+
+		/* --- Hero Section --- */
+		.hero {
+			height: 100vh;
+			background: linear-gradient(to top, var(--netflix-black) 5%, transparent 40%), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			overflow: hidden;
+			flex-direction: column;
+		}
+
+		.background-icons {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			overflow: hidden;
+		}
+
+		.background-icons i {
+			position: absolute;
+			font-size: 60px;
+			color: rgba(255, 255, 255, 0.1);
+			animation: float 25s linear infinite;
+			text-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+		}
+
+		@keyframes float {
+			0% {
+				transform: translateY(5vh) rotate(0deg);
+				opacity: 0;
+			}
+			10%,
+			90% {
+				opacity: 1;
+			}
+			100% {
+				transform: translateY(-105vh) rotate(360deg);
+				opacity: 0;
+			}
+		}
+
+		#heroLogoContainer {
+			position: absolute;
+			top: 40%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 5;
+			opacity: 0;
+			animation: fadeInLogo 2s forwards ease-out;
+			animation-delay: 0.5s;
+			transition: opacity 0.5s ease-in-out;
+		}
+
+		.hero-logo {
+			color: var(--netflix-red);
+			font-size: 11vw; /* Reduced size */
+			font-weight: bold;
+			user-select: none;
+			font-family: 'Bebas Neue', sans-serif;
+			letter-spacing: 8px;
+			text-shadow: 0 0 25px rgba(229, 9, 20, 0.6), 0 0 50px rgba(229, 9, 20, 0.4);
+			animation: logoGlow 4s infinite alternate;
+		}
+
+		@keyframes fadeInLogo {
+			from {
+				opacity: 0;
+				transform: translate(-50%, -50%) scale(0.8);
+			}
+			to {
+				opacity: 1;
+				transform: translate(-50%, -50%) scale(1);
+			}
+		}
+
+		@keyframes logoGlow {
+			from {
+				text-shadow: 0 0 25px rgba(229, 9, 20, 0.6), 0 0 50px rgba(229, 9, 20, 0.4);
+			}
+			to {
+				text-shadow: 0 0 35px rgba(229, 9, 20, 0.8), 0 0 70px rgba(229, 9, 20, 0.6);
+			}
+		}
+
+		#heroLogoContainer.hidden {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.hero-content {
+			z-index: 2;
+			position: relative;
+			text-align: center;
+			margin-top: 25vh; /* Adjusted margin */
+			opacity: 0;
+			animation: fadeInContent 1.5s forwards ease-out;
+			animation-delay: 2s;
+		}
+
+		@keyframes fadeInContent {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.hero .subtitle {
+			font-size: 32px;
+			color: var(--text-light);
+			font-family: 'Bebas Neue', sans-serif;
+			letter-spacing: 2px;
+			margin-bottom: 20px;
+		}
+
+		.hero .description {
+			font-size: 18px;
+			color: var(--text-medium);
+			margin-bottom: 30px;
+			line-height: 1.6;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.cta-buttons {
+			display: flex;
+			gap: 15px;
+			justify-content: center;
+		}
+
+		.cta-button {
+			background: var(--netflix-red);
+			color: var(--text-light);
+			border: none;
+			padding: 15px 35px;
+			font-size: 18px;
+			font-weight: bold;
+			border-radius: 4px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+			text-decoration: none;
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.cta-button:hover {
+			background: #f40612;
+		}
+
+		.cta-button.secondary {
+			background: rgba(109, 109, 110, 0.7);
+			color: white;
+		}
+
+		.cta-button.secondary:hover {
+			background: rgba(109, 109, 110, 0.5);
+		}
+
+		/* --- Content Sections & Project Rows --- */
+		.section {
+			padding: 10px 0 50px;
+		}
+
+		.section-title {
+			font-size: 28px;
+			margin-bottom: 15px;
+			color: var(--text-light);
+			padding-left: 60px;
+		}
+
+		.projects-row {
+			position: relative;
+		}
+
+		.projects-container {
+			display: flex;
+			gap: 10px;
+			overflow-x: auto;
+			overflow-y: hidden;
+			padding: 10px 60px 20px;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+			scroll-behavior: smooth;
+		}
+		.projects-container::-webkit-scrollbar {
+			display: none;
+		}
+
+		.project-card {
+			flex: 0 0 24vw;
+			max-width: 400px;
+			background: var(--netflix-dark-gray);
+			border-radius: 6px;
+			overflow: hidden;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			cursor: pointer;
+			position: relative;
+		}
+
+		.project-card:hover {
+			transform: scale(1.08);
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+			z-index: 10;
+		}
+
+		.project-card:hover .project-content {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.project-thumbnail {
+			height: 13.5vw;
+			min-height: 180px;
+			background: linear-gradient(135deg, var(--netflix-red), #333);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			font-family: 'Bebas Neue', sans-serif;
+			text-align: center;
+			padding: 10px;
+			color: var(--text-light);
+		}
+		.achievement-logo {
+			width: 60px;
+			height: 60px;
+			margin-bottom: 15px;
+		}
+
+		.project-content {
+			padding: 20px;
+			background: linear-gradient(to top, rgba(20,20,20,1) 50%, transparent);
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			opacity: 0;
+			transform: translateY(20px);
+			transition: opacity 0.3s ease, transform 0.3s ease;
+		}
+		.project-title {
+			font-size: 22px;
+			margin-bottom: 10px;
+		}
+		.project-tech {
+			font-size: 14px;
+			color: var(--text-medium);
+			margin-bottom: 15px;
+			font-weight: bold;
+		}
+		.project-description {
+			color: var(--text-light);
+			line-height: 1.5;
+			font-size: 15px;
+		}
+
+		.scroll-arrow {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 50px;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			color: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 2.5rem;
+			cursor: pointer;
+			z-index: 20;
+			opacity: 0;
+			transition: opacity 0.3s ease;
+		}
+		.projects-row:hover .scroll-arrow {
+			opacity: 1;
+		}
+		.scroll-arrow.left {
+			left: 0;
+		}
+		.scroll-arrow.right {
+			right: 0;
+		}
+		.scroll-arrow:hover {
+			background: rgba(0, 0, 0, 0.8);
+		}
+
+		/* --- Contact Section --- */
+		.contact-container {
+			display: flex;
+			justify-content: center;
+			gap: 30px;
+			padding: 20px 60px;
+			flex-wrap: wrap;
+		}
+		.contact-card {
+			background: var(--netflix-dark-gray);
+			padding: 30px 40px;
+			border-radius: 6px;
+			text-align: center;
+			width: 300px;
+			transition: transform 0.3s, background 0.3s;
+		}
+		.contact-card:hover {
+			transform: translateY(-5px);
+			background: #333;
+		}
+		.contact-card a {
+			text-decoration: none;
+			color: var(--text-light);
+		}
+		.contact-card svg {
+			width: 40px;
+			height: 40px;
+			margin-bottom: 15px;
+			fill: var(--netflix-red);
+		}
+		.contact-card h3 {
+			font-size: 22px;
+			margin-bottom: 5px;
+		}
+		.contact-card p {
+			color: var(--text-medium);
+			font-size: 16px;
+		}
+
+		/* --- Footer --- */
+		.footer {
+			text-align: center;
+			padding: 40px 60px;
+			background: #000000;
+			margin-top: 50px;
+		}
+		.footer p {
+			color: #808080;
+			margin-bottom: 20px;
+		}
+		.social-links {
+			display: flex;
+			justify-content: center;
+			gap: 25px;
+		}
+		.social-links a {
+			color: var(--text-medium);
+			transition: color 0.3s, transform 0.3s;
+			display: inline-block;
+		}
+		.social-links a:hover {
+			color: var(--text-light);
+			transform: scale(1.1);
+		}
+		.social-links svg {
+			width: 28px;
+			height: 28px;
+		}
+
+		.highlight {
+			color: var(--netflix-red);
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar" id="navbar">
+		<div class="navbar-logo">JATIN RAY</div>
+		<div class="nav-links">
+			<a href="#experience" class="nav-link">Experience</a>
+			<a href="#projects" class="nav-link">Projects</a>
+			<a href="#skills" class="nav-link">Skills</a>
+			<a href="#achievements" class="nav-link">Achievements</a>
+			<a href="#contact" class="nav-link">Contact</a>
+		</div>
+	</nav>
+
+	<header class="hero">
+		<div class="background-icons">
+			<i class="devicon-python-plain" style="left:10%; animation-duration:18s; top: 100vh;"></i>
+			<i class="devicon-r-original" style="left:20%; animation-duration:22s; top: 100vh; font-size: 40px;"></i>
+			<i class="devicon-jupyter-plain" style="left:30%; animation-duration:25s; top: 100vh;"></i>
+			<i class="devicon-tensorflow-original" style="left:40%; animation-duration:20s; top: 100vh; font-size: 70px;"></i>
+			<i class="devicon-pytorch-original" style="left:50%; animation-duration:24s; top: 100vh;"></i>
+			<i class="devicon-pandas-original" style="left:60%; animation-duration:26s; top: 100vh; font-size: 50px;"></i>
+			<i class="devicon-numpy-original" style="left:70%; animation-duration:28s; top: 100vh;"></i>
+			<i class="devicon-django-plain" style="left:80%; animation-duration:19s; top: 100vh; font-size: 45px;"></i>
+			<i class="devicon-docker-plain" style="left:90%; animation-duration:23s; top: 100vh;"></i>
+			<i class="devicon-git-plain" style="left:5%; animation-duration:29s; top: 100vh; font-size: 40px;"></i>
+		</div>
+
+		<div id="heroLogoContainer">
+			<div class="hero-logo">JATIN RAY</div>
+		</div>
+
+		<div class="hero-content">
+			<div class="subtitle">Data Scientist & AI Engineer</div>
+			<div class="description">
+				Transforming complex data into intelligent solutions. Specialized in
+				<span class="highlight">AI/ML</span>,
+				<span class="highlight">fraud detection</span>, and
+				<span class="highlight">cybersecurity</span>.
+			</div>
+			<div class="cta-buttons">
+				<a href="#projects" class="cta-button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor">
+						<path d="M8 5v14l11-7z"></path>
+					</svg>
+					Explore Work
+				</a>
+				<a href="#contact" class="cta-button secondary">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor">
+						<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path>
+					</svg>
+					Get In Touch
+				</a>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section id="experience" class="section">
+			<h2 class="section-title">Professional Experience</h2>
+			<div class="projects-row" data-row-id="1">
+				<div class="projects-container">
+					<div class="project-card">
+						<div class="project-thumbnail">HCL Technologies</div>
+						<div class="project-content">
+							<div class="project-title">Data Science Intern</div>
+							<div class="project-tech">Apr 2025 - Jul 2025</div>
+							<div class="project-description">Developed an AI-powered credit card fraud detection system with
+								<span class="highlight">95% accuracy</span>
+								and integrated AI virtual assistants into healthcare systems.</div>
+						</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail">Innefu Labs</div>
+						<div class="project-content">
+							<div class="project-title">Data Science Intern</div>
+							<div class="project-tech">Feb 2025 - May 2025</div>
+							<div class="project-description">
+								Built an E2E AI solution for criminal identification achieving
+								<span class="highlight">92% suspect matching accuracy</span>
+								and reducing investigation time by up to 70%.
+								<!--Integrated AI-driven virtual assistants into healthcare systems, securely handling 10K daily patient interactions, improving workflow efficiency by 35%, and reducing documentation time by 50% for medical professionals.-->
+							</div>
+						</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail">Happiest Minds</div>
+						<div class="project-content">
+							<div class="project-title">Data Science Intern</div>
+							<div class="project-tech">Jul 2024 - Aug 2024</div>
+							<div class="project-description">Engineered a Stable Diffusion model improving efficiency by
+								<span class="highlight">70%</span>
+								and led a GMV forecasting model improving accuracy by
+								<span class="highlight">15%</span>.</div>
+						</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail">Nokia</div>
+						<div class="project-content">
+							<div class="project-title">Network Telecom Intern</div>
+							<div class="project-tech">Jul 2023 - Nov 2023</div>
+							<div class="project-description">Implemented EMC/EMI basics and IMS concepts in collaboration with RJIO, ensuring adherence to EMC standards for product performance.</div>
+						</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail">Codec Networks</div>
+						<div class="project-content">
+							<div class="project-title">Cybersecurity Intern</div>
+							<div class="project-tech">Aug 2023 - Oct 2023</div>
+							<div class="project-description">Performed Vulnerability Analysis and Penetration Testing with
+								<span class="highlight">89% accuracy</span>, discovering key flaws in Android and local systems.</div>
+						</div>
+					</div>
+				</div>
+				<div class="scroll-arrow left">‹</div>
+				<div class="scroll-arrow right">›</div>
+			</div>
+		</section>
+
+		<section id="projects" class="section">
+			<h2 class="section-title">Featured Projects</h2>
+			<div class="projects-row" data-row-id="2">
+				<div class="projects-container">
+					<div class="project-card">
+						<div class="project-thumbnail">Smart Cart AI System</div>
+						<div class="project-content">
+							<div class="project-title">Smart Cart AI System</div>
+							<div class="project-tech">Python • OpenCV • Django • ML</div>
+							<div class="project-description">AI-IoT system for real-time billing, reducing store wait times by
+								<span class="highlight">90%</span>
+								with high-performance image and data processing.</div>
+						</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail">Legal Buddy AI</div>
+						<div class="project-content">
+							<div class="project-title">Legal Buddy AI</div>
+							<div class="project-tech">Python • Deep Learning • LSTM • NLP</div>
+							<div class="project-description">NLP-powered legal app that predicts applicable laws from case descriptions with
+								<span class="highlight">80% accuracy</span>.</div>
+						</div>
+					</div>
+				</div>
+				<div class="scroll-arrow left">‹</div>
+				<div class="scroll-arrow right">›</div>
+			</div>
+		</section>
+
+		<section id="skills" class="section">
+			<h2 class="section-title">My Toolkit</h2>
+			<div class="projects-row" data-row-id="3">
+				<div class="projects-container">
+					<div class="project-card">
+						<div class="project-thumbnail" style="font-size: 24px;">Deep Learning</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail" style="font-size: 24px;">Agentic AI</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail" style="font-size: 24px;">Git & Docker</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail" style="font-size: 24px;">Python, C#, Java, R</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail" style="font-size: 24px;">Pandas & Power BI</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail" style="font-size: 24px;">GCP & Azure</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail" style="font-size: 24px;">MongoDB & MySQL</div>
+					</div>
+					<div class="project-card">
+						<div class="project-thumbnail" style="font-size: 24px;">Penetration Testing</div>
+					</div>
+				</div>
+				<div class="scroll-arrow left">‹</div>
+				<div class="scroll-arrow right">›</div>
+			</div>
+		</section>
+
+		<section id="achievements" class="section">
+			<h2 class="section-title">Achievements & Certifications</h2>
+			<div class="projects-row" data-row-id="4">
+				<div class="projects-container">
+					<div class="project-card">
+						<div class="project-thumbnail">
+							<img class="achievement-logo" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo" viewbox="0 0 24 24" fill="currentColor"><path d="M2.5 12.5l7.5 7.5l11.5-11.5l-2-2l-9.5 9.5l-5.5-5.5z"/></img>
+						Microsoft Azure AI Certified
+					</div>
+				</div>
+				<div class="project-card">
+					<div class="project-thumbnail">
+						<img class="achievement-logo" src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" alt="LeetCode Logo" viewbox="0 0 24 24" fill="currentColor"><path d="M12 2L1 9l4 12h14l4-12L12 2zm0 15c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></img>
+					400+ Leetcode Questions
+				</div>
+			</div>
+			<div class="project-card">
+				<div class="project-thumbnail">
+					<img class="achievement-logo" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v9/icons/tryhackme.svg" alt="TryHackMe Logo" viewbox="0 0 24 24" fill="currentColor">
+					<path d="M10.5 3C8.01 3 6 5.01 6 7.5c0 1.2.47 2.28 1.23 3.08L9 12.34V21h6v-8.66l1.77-1.76C17.53 9.78 18 8.7 18 7.5 18 5.01 15.99 3 13.5 3h-3zm1.5 6c-.83 0-1.5-.67-1.5-1.5S11.17 6 12 6s1.5.67 1.5 1.5S12.83 9 12 9z"/>
+				</img>
+				Top 2% on TryHackMe
+			</div>
+		</div>
+		<div class="project-card">
+			<div class="project-thumbnail">
+				<svg class="achievement-logo" src="https://commons.wikimedia.org/wiki/File:Kaggle_Logo.svg" alt="Kaggle Logo" viewbox="0 0 24 24" fill="currentColor"><path d="M16 0H8C3.58 0 0 3.58 0 8v8c0 4.42 3.58 8 8 8h8c4.42 0 8-3.58 8-8V8c0-4.42-3.58-8-8-8zm-2.5 18H11v-5.5h2.5V18zm0-7.5H11V5h2.5v5.5z"/></svg>
+				Kaggle Notebook Contributor
+			</div>
+		</div>
+	</div>
+	<div class="scroll-arrow left">‹</div>
+	<div class="scroll-arrow right">›</div>
+</body></html></div></section><section id="contact" class="section"><h2 class="section-title">Get In Touch</h2><div class="contact-container"><div class="contact-card">
+<a href="mailto:rayjatin1234@gmail.com">
+	<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+	<h3>Email</h3>
+	<p>rayjatin1234@gmail.com</p>
+</a></div><div class="contact-card">
+<a href="tel:+919667539322">
+	<svg viewbox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.02.74-.25 1.02l-2.2 2.2z"/></svg>
+	<h3>Phone</h3>
+	<p>+91 9667539322</p>
+</a></div></div></section></main><footer class="footer"><p>© 2025 Jatin Ray. Designed with inspiration from Netflix.</p><div class="social-links"><a href="https://www.linkedin.com/in/jatin-ray/" target="_blank" title="LinkedIn"><svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a><a href="https://github.com/jatinray99" target="_blank" title="GitHub"><svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a><a href="https://leetcode.com/u/jray99/" target="_blank" title="LeetCode"><svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.48 4.49l-1.42-1.42L1 12l11.06 8.93 1.42-1.42L3.83 12l9.65-7.51zM21.57 4.49L12 12l9.57 7.51 1.42-1.42L14.17 12l8.81-8.93-1.41-1.42z"/></svg></a><a href="https://www.kaggle.com/jatinray" target="_blank" title="Kaggle"><svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.3 9.3l-2.4 2.4 2.4 2.4-1.4 1.4-2.4-2.4-2.4 2.4-1.4-1.4 2.4-2.4-2.4-2.4 1.4-1.4 2.4 2.4 2.4-2.4 1.4 1.4zm6.2-6.2L12 9.6 5.5 3.1 3.1 5.5 9.6 12l-6.5 6.5 2.4 2.4L12 14.4l6.5 6.5 2.4-2.4L14.4 12l6.5-6.5-2.4-2.4z"/></svg></a><a href="https://www.codechef.com/users/jray_0602" target="_blank" title="CodeChef"><svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-4v-2h2v2h-2zm0-4V7h2v2h-2z"/></svg></a></div></footer><script>document.addEventListener('DOMContentLoaded', () => {
+	const navbar = document.getElementById('navbar');
+	const heroLogoContainer = document.getElementById('heroLogoContainer');
+	const scrollThreshold = 50;
+
+	window.onscroll = () => {
+		if (window.scrollY > scrollThreshold) {
+			navbar.classList.add('scrolled');
+			if (heroLogoContainer) {
+				heroLogoContainer.classList.add('hidden');
+			}
+		} else {
+			navbar.classList.remove('scrolled');
+			if (heroLogoContainer) {
+				heroLogoContainer.classList.remove('hidden');
+			}
+		}
+	};
+
+	const projectRows = document.querySelectorAll('.projects-row');
+
+	projectRows.forEach(row => {
+		const container = row.querySelector('.projects-container');
+		const leftArrow = row.querySelector('.scroll-arrow.left');
+		const rightArrow = row.querySelector('.scroll-arrow.right');
+
+		if (! container || ! leftArrow || ! rightArrow) 
+			return;
+		
+
+		const scrollAmount = container.clientWidth * 0.8;
+
+		rightArrow.addEventListener('click', () => {
+			container.scrollBy({left: scrollAmount, behavior: 'smooth'});
+		});
+
+		leftArrow.addEventListener('click', () => {
+			container.scrollBy({
+				left: - scrollAmount,
+				behavior: 'smooth'
+			});
+		});
+	});
+});</script></body></html>
